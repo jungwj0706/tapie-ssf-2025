@@ -124,17 +124,30 @@ function initializeGame() {
 }
 
 function startGame() {
-    // 게임을 시작하는 함수의 코드를 작성해봅시다. 이 함수에서는 다음과 같은 것들을 해요!
+    // 게임을 시작하는 함수입니다. 
 
-    // 게임에 필요한 정적 객체들 (벽) 추가
-    // 게임 UI 표시
-    // 다음에 떨어뜨릴 과일 설정
-    // 미리보기 과일 생성 및 추가
-    // 게임 상태를 '준비'로 변경 (과일을 떨어뜨릴 수 있는 상태)
-    // 마우스 클릭 이벤트 리스너: 과일 떨어뜨리기
-    // 마우스 이동 이벤트 리스너: 미리보기 과일 위치 업데이트
-    // 충돌 이벤트 리스너: 과일 합치기 및 게임 오버 감지
-    // 게임 오버 라인 감지 이벤트 리스너 추가
+    setupGameStatics();
+
+    gameUI.style.display = 'block';
+    gameEndContainer.style.display = 'none';
+    gameEndTitle.innerText = 'Game Over!';
+
+    setNextFruitSize();
+
+    previewFruitBody = createFruitBody(GAME_WIDTH / 2, PREVIEW_BALL_HEIGHT, currentDroppingFruitSizeIndex, { isStatic: true });
+    Composite.add(world, previewFruitBody);
+
+    setTimeout(() => {
+        currentGameState = GAME_STATE.READY;
+    }, 250);
+    
+    // 과일을 떨어뜨리는 마우스 클릭 이벤트 리스너 코드를 작성해봅시다.
+
+    // 미리보기 과일 위치를 업데이트하는 마우스 이동 이벤트 리스너 코드를 작성해봅시다.
+    
+    // 과일 합치기 및 게임 오버를 감지하는 충돌 이벤트 리스너 코드를 작성해봅시다.
+
+    Events.on(engine, 'afterUpdate', checkGameOver);
 }
 
 function setupGameStatics() {
