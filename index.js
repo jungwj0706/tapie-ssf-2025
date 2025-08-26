@@ -277,8 +277,6 @@ function handleCollision(event) {
 }
 
 function checkGameOver() {
-    // 게임 오버 조건을 확인하는 함수입니다.
-
     if (currentGameState !== GAME_STATE.LOSE) {
         const bodies = Composite.allBodies(engine.world);
         for (let i = 0; i < bodies.length; i++) {
