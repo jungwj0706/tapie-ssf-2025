@@ -196,30 +196,27 @@ function addFruit(xPosition) {
     // 게임 상태가 '준비'가 아니면 함수의 실행을 중단하는 코드를 작성해봅시다.
 
     gameSounds.click.play();
-
     currentGameState = GAME_STATE.DROP;
 
     // 현재 떨어뜨릴 과일을 생성하는 코드를 작성해봅시다. (HINT: 물리세계에 과일을 추가하는 로직이 있어야 해요!)
 
-    // 현재 과일을 다음에 떨어뜨릴 과일로 설정하고, 새로운 다음 과일 설정
     currentDroppingFruitSizeIndex = nextDroppingFruitSizeIndex;
     setNextFruitSize();
 
     Composite.remove(world, previewFruitBody);
 
-    // 잠시 후 새로운 미리보기 과일 생성 및 게임 상태 '준비'로 변경
-    // 과일이 완전히 떨어지고 난 후 다음 과일을 떨어뜨릴 수 있도록 딜레이를 줍니다.
     setTimeout(() => {
-        // 게임 오버 상태가 아니면 미리보기 과일 다시 추가
+        
         if (currentGameState !== GAME_STATE.LOSE) {
             previewFruitBody = createFruitBody(xPosition, PREVIEW_BALL_HEIGHT, currentDroppingFruitSizeIndex, {
                 isStatic: true,
-                collisionFilter: { mask: 0x0040 } // 미리보기 과일은 다른 과일과 충돌하지 않도록 설정
+                collisionFilter: { mask: 0x0040 }
             });
             Composite.add(world, previewFruitBody);
-            currentGameState = GAME_STATE.READY; // 게임 상태를 다시 '준비'로 변경
+
+            // 게임 상태를 다시 '준비'로 변경하는 코드를 작성해봅시다.
         }
-    }, 500); // 0.5초 딜레이
+    }, 500);
 }
 
 function handleFruitDrop(event) {
