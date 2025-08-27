@@ -236,25 +236,21 @@ function calculateScore() {
 }
 
 function loadHighscore() {
-    // 최고 점수를 로드하는 함수입니다.
-
     const savedCache = localStorage.getItem('suika-game-cache');
     if (savedCache) {
         const cacheData = JSON.parse(savedCache);
-        // 최고 점수를 설정하는 코드를 작성해봅시다.
+        highscore = cacheData.highscore || 0;
     }
-    gameHighscoreValue.innerText = highscore; 
+    gameHighscoreValue.innerText = highscore;
 }
 
 function saveHighscore() {
-    // 최고 점수 저장 함수입니다.
-
-    calculateScore();
+    calculateScore(); 
     if (currentScore > highscore) {
-        // 현재 점수가 최고 점수보다 높으면 업데이트하는 코드를 작성해봅시다
+        highscore = currentScore; 
         gameHighscoreValue.innerText = highscore;
         gameEndTitle.innerText = 'New Highscore!';
-        localStorage.setItem('suika-game-cache', JSON.stringify({ highscore: highscore }));
+        localStorage.setItem('suika-game-cache', JSON.stringify({ highscore: highscore })); 
     }
 }
 
@@ -318,7 +314,7 @@ function mergeFruits(fruit1, fruit2) {
     const newFruit = createFruitBody(midPosX, midPosY, newSizeIndex);
     Composite.add(world, newFruit);
 
-    // 점수를 업데이트 하는 코드를 작성해봅시다. 아까 선언한 함수를 이용해야겠죠?
+    // 점수를 업데이트 하는 코드를 작성해봅시다. 아까 선언한 함수 중 어떤 걸 이용해야할지 잘 생각해보새요!
 
     addPopEffect(midPosX, midPosY, fruit1.radius);
 }
